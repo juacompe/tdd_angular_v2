@@ -1,8 +1,8 @@
 <html>
     <head>
     </head>
-    <body ng-app>
-        <section ng-controller="TodoCtrl">
+    <body ng-app="todoApp">
+        <section ng-controller="TodoCtrl" ng-init="loadTodoItems()">
             <h1>Todo Application</h1>
             <form ng-submit="addNewItem()">
                 <input type="text" ng-model="newItem" placeholder="Type your todo here..."></input>
@@ -13,9 +13,11 @@
                     {{ item.title }} <a ng-click="removeItem(item)">x</a>
                 </li>
             </ul>
+            <input type="button" ng-click="save()" value="Save"></input>
         </section>
         <script type="text/javascript" src="/static/js/lib/underscore.js"></script>
         <script type="text/javascript" src="/static/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="/static/js/lib/angular-resource.min.js"></script>
         <script type="text/javascript" src="/static/js/todo.js"></script>
     </body>
 </html>

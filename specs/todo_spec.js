@@ -1,10 +1,19 @@
 describe('TodoCtrl', function() {
-    var $scope;
+    var $scope, Todos;
+
+    beforeEach(module('todoApp'));
     beforeEach(inject(function($rootScope, $controller){
         $scope = $rootScope.$new();
         $controller('TodoCtrl', {
             $scope: $scope,
+            Todos: Todos,
         });
+        $scope.todoItems = [
+            { title: 'Learn Angular', done: true },
+            { title: 'Build Angular App', done: false },
+            { title: 'Master Angular', done: false },
+        ];
+
     }));
 
     describe('initialization', function() {

@@ -16,6 +16,7 @@ module.exports = function(karma) {
     files: [
     // libraries
     'static/js/lib/angular.min.js',
+    'static/js/lib/angular-resource.min.js',
     'static/js/lib/*.js',
 
     // our app
