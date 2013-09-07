@@ -30,6 +30,7 @@ function TodoCtrl($scope, Todos) {
 
     $scope.save = function() {
         Todos.save($scope.todoItems);
+        $scope.message = 'Save complete!';
     };
 };
 

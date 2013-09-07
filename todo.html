@@ -14,6 +14,9 @@
                 </li>
             </ul>
             <input type="button" ng-click="save()" value="Save"></input>
+            <div id="message" ng-show="message">
+                {{ message }}
+            </div>
         </section>
         <script type="text/javascript" src="/static/js/lib/underscore.js"></script>
         <script type="text/javascript" src="/static/js/lib/angular.min.js"></script>
