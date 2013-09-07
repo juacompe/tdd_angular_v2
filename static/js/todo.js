@@ -1,15 +1,8 @@
-angular.module('todoApp', ['ngResource']).
-    value('fbURL', 'https://juacompe-todo-app.firebaseio.com/todos.json').
-    factory('Todos', function($resource, fbURL) {
-        var defaultParams, actions;
-        defaultParams = {};
-        actions = {
-            save: { method: 'PUT', isArray: true }
-        };
-        return $resource(fbURL, defaultParams, actions);
-    }).
-    controller('TodoCtrl', ['$scope', 'Todos', TodoCtrl]
-    );
+var todoApp;
+todoApp = angular.module('todoApp', ['ngResource']);
+todoApp.value('fbURL', 'https://juacompe-todo-app.firebaseio.com/todos.json');
+todoApp.factory('Todos', Todos);
+todoApp.controller('TodoCtrl', ['$scope', 'Todos', TodoCtrl]);
 
 function TodoCtrl($scope, Todos) {
     $scope.newItem = '';
@@ -38,4 +31,13 @@ function TodoCtrl($scope, Todos) {
     $scope.save = function() {
         Todos.save($scope.todoItems);
     };
+};
+
+function Todos($resource, fbURL) {
+    var defaultParams, actions;
+    defaultParams = {};
+    actions = {
+        save: { method: 'PUT', isArray: true }
+    };
+    return $resource(fbURL, defaultParams, actions);
 };
