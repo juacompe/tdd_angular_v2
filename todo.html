@@ -1,0 +1,20 @@
+<html>
+    <head>
+    </head>
+    <body ng-app>
+        <section ng-controller="TodoCtrl">
+            <h1>Todo Application</h1>
+            <form ng-submit="addNewItem()">
+                <input type="text" ng-model="newItem"></input>
+            </form>
+            <ul ng-repeat="item in todoItems">
+                <li>
+                    <input type="checkbox" ng-model="item.done"></input>
+                    {{ item.title }}
+                </li>
+            </ul>
+        </section>
+        <script type="text/javascript" src="/static/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="/static/js/todo.js"></script>
+    </body>
+</html>
