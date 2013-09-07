@@ -44,6 +44,35 @@ describe('TodoCtrl', function() {
             expect(newlyAddedItem.title).toEqual('Eat Lunch!!');
             expect(newlyAddedItem.done).toEqual(false);
         });
+
+        it('should not add empty item into todo list', function() {
+            $scope.newItem = '';
+            $scope.addNewItem();
+            expect($scope.todoItems.length).toEqual(3);
+        });
     }); // addNewItem
+
+    describe('removeItem', function() {
+        it('should be able to remove the first item in the list', function() {
+            var firstItem = $scope.todoItems[0];
+            $scope.removeItem(firstItem);
+            expect($scope.todoItems.length).toEqual(2);
+        });
+
+        it('should be able to remove the last item in the list', function() {
+            var lastItem = $scope.todoItems[2];
+            $scope.removeItem(lastItem);
+            expect($scope.todoItems.length).toEqual(2);
+        });
+
+        it('should do nothing when the given item is not in the list', function() {
+            var itemToRemove = {
+                item: 'This is not in list',
+                done: false,
+            };
+            $scope.removeItem(itemToRemove);
+            expect($scope.todoItems.length).toEqual(3);
+        });
+    }); // removeItem
 });
 

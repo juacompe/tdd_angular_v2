@@ -5,15 +5,16 @@
         <section ng-controller="TodoCtrl">
             <h1>Todo Application</h1>
             <form ng-submit="addNewItem()">
-                <input type="text" ng-model="newItem"></input>
+                <input type="text" ng-model="newItem" placeholder="Type your todo here..."></input>
             </form>
             <ul ng-repeat="item in todoItems">
                 <li>
                     <input type="checkbox" ng-model="item.done"></input>
-                    {{ item.title }}
+                    {{ item.title }} <a ng-click="removeItem(item)">x</a>
                 </li>
             </ul>
         </section>
+        <script type="text/javascript" src="/static/js/lib/underscore.js"></script>
         <script type="text/javascript" src="/static/js/lib/angular.min.js"></script>
         <script type="text/javascript" src="/static/js/todo.js"></script>
     </body>

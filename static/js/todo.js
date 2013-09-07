@@ -7,10 +7,18 @@ function TodoCtrl($scope) {
     ];
     
     $scope.addNewItem = function() {
-        $scope.todoItems.push({
-            title: $scope.newItem,
-            done: false,
+        if($scope.newItem) {
+            $scope.todoItems.push({
+                title: $scope.newItem,
+                done: false,
+            });
+            $scope.newItem = '';
+        }
+    }
+
+    $scope.removeItem = function(item) {
+        $scope.todoItems = _.reject($scope.todoItems, function(x) {
+            return x == item;
         });
-        $scope.newItem = '';
     }
 };
