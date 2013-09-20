@@ -14,12 +14,17 @@ function TodoController($scope, TodoService) {
     ]; 
 
     $scope.add = function(newItem) {
-        $scope.items.push(newItem);
+        var item = {name: newItem};
+        $scope.items.push(item);
         $scope.newItem = '';
     }
 
     $scope.load = function() {
         $scope.items = TodoService.query();
+    }
+
+    $scope.save = function() {
+        TodoService.save($scope.items);
     }
 };
 
