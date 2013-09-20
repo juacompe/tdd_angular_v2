@@ -1,6 +1,16 @@
-describe('sanity check', function() {
-    it('1 + 2 should = 3', function() {
-        expect(1 + 2).toEqual(3);
+describe('TodoController', function() {
+    var $scope;
+
+    beforeEach(inject(function($rootScope, $controller) {
+        $scope = $rootScope.$new();
+        // $controller('name', configuration);
+        $controller('TodoController', {
+            $scope: $scope,
+        });
+    }));
+
+    it('should have 2 items after initialized', function() {
+        expect($scope.items.length).toEqual(2);
     });
 });
 

@@ -1,0 +1,17 @@
+<html>
+    <head>
+    </head>
+    <body ng-app>
+        <h1>Todo Application</h1>
+
+        <div ng-controller="TodoController">
+            <ul>
+                <li ng-repeat="item in items">{{ item }}</li>
+            </ul>
+        </div>
+
+        <script type="text/javascript" src="static/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="static/js/todo.js"></script>
+    </body>
+</html>
+
