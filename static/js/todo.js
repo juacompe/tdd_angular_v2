@@ -1,21 +1,25 @@
 var todoApp, plugins, injections;
-plugins = [];
+plugins = ['ngResource'];
 todoApp = angular.module('TodoApp', plugins);
-todoApp.service('TodoService', TodoService);
+todoApp.value('fbURL', 'https://juacompe-todo-app.firebaseio.com/todos.json');
+todoApp.factory('TodoService', TodoService);
 injections = ['$scope', 'TodoService', TodoController];
 todoApp.controller('TodoController', injections);
 
 function TodoController($scope, TodoService) {
     $scope.items = [];
 
-    $scope.loadItems = function() {
-        items = TodoService.query();
-        items.forEach(function(itemJson) {
-            var item;
-            item = new Item(itemJson.title, itemJson.done);
-            $scope.items.push(item);
+    $scope.init = function() {
+        var items, params;
+        params = {};
+        items = TodoService.query(params, $scope.loadItems); 
+    };
+
+    $scope.loadItems = function(items) {
+        items.forEach(function(json) {
+            $scope.addItem(json.title, json.done);
         });
-    }
+    };
 
     $scope.getItemLength = function() {
         return $scope.items.length;
@@ -26,8 +30,11 @@ function TodoController($scope, TodoService) {
         return $scope.items[index];
     };
 
-    $scope.addItem = function(description) {
-        var newItem = new Item(description, false);
+    $scope.addItem = function(description, done) {
+        var newItem;
+        if(done == undefined)
+            done = false;
+        newItem = new Item(description, done);
         $scope.items.push(newItem);
     }
 
@@ -49,12 +56,9 @@ function Item(description, done) {
     }
 }
 
-function TodoService() {
-    this.query = function() {
-        return [
-            { title: 'เรียน Angular', done: true },
-            { title: 'เรียน TDD', done: true },
-            { title: 'กลับบ้าน', done: false },
-        ];
-    }
+function TodoService($resource, fbURL) {
+    var defaultParams, actions;
+    defaultParams = {};
+    actions = {};
+    return $resource(fbURL, defaultParams, actions);
 }

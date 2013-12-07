@@ -63,6 +63,11 @@ describe('TodoController', function() {
         expectItemIsNotDone(4);
     });
 
+    it('should be able to add done item for loading', function() {
+        $scope.addItem('loaded item', true);
+        expectItemIsDone(4);
+    });
+
     it('should add new item when form is submitted', function() {
         $scope.newDescription = 'อันใหม่';
         $scope.formSubmitted();

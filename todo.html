@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="static/css/todo.css">
     </head>
     <body ng-app="TodoApp">
-        <form ng-controller="TodoController" ng-init="loadItems()" ng-submit="formSubmitted()">
+        <form ng-controller="TodoController" ng-init="init()" ng-submit="formSubmitted()">
             <input type="text" ng-model="newDescription" placeholder="type new item here">
             <ul>
                 <li ng-repeat="item in items" class="{{ item.css() }}">
@@ -16,6 +16,7 @@
         </form>
 
         <script src="static/js/lib/angular.min.js"></script>
+        <script src="static/js/lib/angular-resource.min.js"></script>
         <script src="static/js/todo.js"></script>
     </body>
 </html>
