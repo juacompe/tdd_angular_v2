@@ -6,9 +6,19 @@ describe('TodoController', function() {
         $scope = $rootScope.$new();
         configuration = {
             $scope: $scope,
+            TodoService: null,
         };
         $controller('TodoController', configuration);
+        mockItemsFromTodoService();
     }));
+
+    function mockItemsFromTodoService() {
+        $scope.items = [
+            new Item('เรียน Angular', true),
+            new Item('เรียน TDD', true),
+            new Item('กลับบ้าน', false),
+        ];
+    }
 
     it('should starts with 3 items', function() {
         expect($scope.getItemLength()).toEqual(3);

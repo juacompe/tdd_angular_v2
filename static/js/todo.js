@@ -1,9 +1,21 @@
-function TodoController($scope) {
-    $scope.items = [
-        new Item('เรียน Angular', true),
-        new Item('เรียน TDD', true),
-        new Item('กลับบ้าน', false),
-    ];
+var todoApp, plugins, injections;
+plugins = [];
+todoApp = angular.module('TodoApp', plugins);
+todoApp.service('TodoService', TodoService);
+injections = ['$scope', 'TodoService', TodoController];
+todoApp.controller('TodoController', injections);
+
+function TodoController($scope, TodoService) {
+    $scope.items = [];
+
+    $scope.loadItems = function() {
+        items = TodoService.query();
+        items.forEach(function(itemJson) {
+            var item;
+            item = new Item(itemJson.title, itemJson.done);
+            $scope.items.push(item);
+        });
+    }
 
     $scope.getItemLength = function() {
         return $scope.items.length;
@@ -34,5 +46,15 @@ function Item(description, done) {
             return 'done';
         else
             return '';
+    }
+}
+
+function TodoService() {
+    this.query = function() {
+        return [
+            { title: 'เรียน Angular', done: true },
+            { title: 'เรียน TDD', done: true },
+            { title: 'กลับบ้าน', done: false },
+        ];
     }
 }
