@@ -1,10 +1,12 @@
 var hello_world = function() {
-    var name = "roofimon";
+    var name, reverse_name;
+    name = "roofimon";
 
-    var reverse_name = function() {
-        var e = name;
+    reverse_name = function() {
+        var e, name;
+        e = name;
         console.log("hello " + e + "!");
-        var name = "juacompe";
+        name = "juacompe";
     };
 
     reverse_name();
