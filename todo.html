@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="static/css/todo.css">
     </head>
     <body ng-app>
-        <div ng-controller="TodoController">
+        <div ng-controller="TodoController" ng-init="init()">
             <form action="#" ng-submit="addButtonClicked()">
                 <input type="text" ng-model="newItemName">
                 <input type="submit" value="Add">

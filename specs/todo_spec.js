@@ -6,7 +6,16 @@ describe('TodoController', function() {
         $scope = $rootScope.$new();
         configuration = { $scope: $scope };
         $controller('TodoController', configuration);
+        mockTodoItems();
     }));
+
+    function mockTodoItems() {
+        $scope.todos = [
+            new TodoItem('Learn Angular JS',true),
+            new TodoItem('Write Angular JS application',true),
+            new TodoItem('Write TODO application',false)
+        ];
+    };
 
     it('should have newItemName as empty string by default', function() {
         expect($scope.newItemName).toEqual('');
