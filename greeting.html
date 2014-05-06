@@ -1,0 +1,11 @@
+<html>
+    <body ng-app>
+        <div ng-controller="GreetingController">
+            <input type="text" ng-model="name" placeholder="Type your name here..."/>
+            <h1>Hello {{ getName() }}!</h1>
+        </div>
+
+        <script type="text/javascript" src="static/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="static/js/greeting.js"></script>
+    </body>
+</html>
