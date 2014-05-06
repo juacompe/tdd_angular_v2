@@ -1,11 +1,15 @@
 var hello_world = function() {
-    var name = "roofimon";
+    var name;
+    name = "roofimon";
 
     var reverse_name = function() {
-        var e = name;
+        var e, name;
+        e = name;
         console.log("hello " + e + "!");
-        var name = "juacompe";
+        name = "juacompe";
+        console.log("inner scope: name = " + name + "!");
     };
 
     reverse_name();
+    console.log("outter scope: name = " + name + "!");
 };
