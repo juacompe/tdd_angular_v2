@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="static/css/todo.css">
+    </head>
+    <body ng-app>
+        <div ng-controller="TodoController">
+            <form action="#" ng-submit="addButtonClicked()">
+                <input type="text" ng-model="newItemName">
+                <input type="submit" value="Add">
+            </form>
+            <ul>
+                <li ng-repeat="todo in todos" class="{{ todo.css() }}">
+                    <input type="checkbox" ng-model="todo.done">
+                    {{ todo.name }} 
+                </li>
+            </ul>
+        </div>
+
+        <script type="text/javascript" src="static/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="static/js/todo.js"></script>
+    </body>
+</html>
