@@ -1,6 +1,7 @@
 var todoApp, plugins, injections;
 plugins = [];
 todoApp = angular.module('TodoApp', plugins);
+todoApp.value('itemURL', 'https://juacompe-todo-app.firebaseio.com/todos.json');
 todoApp.service('TodoService', TodoService);
 injections = ['$scope', 'TodoService', TodoController];
 todoApp.controller('TodoController', injections);
@@ -10,9 +11,7 @@ function TodoController($scope, TodoService) {
     $scope.todos = [];
 
     $scope.init = function() {
-        var itemsInJson;
-        itemsInJson = TodoService.query();
-        $scope.loadJson(itemsInJson);
+        TodoService.query($scope.loadJson);
     };
 
     $scope.loadJson = function(itemsInJson) {
@@ -44,12 +43,8 @@ function TodoItem(name, done) {
     };
 };
 
-function TodoService() {
-    this.query = function() {
-        return [
-            { title:'Learn Angular JS', done:true },
-            { title:'Write Angular JS application', done:true },
-            { title:'Write TODO application', done:false }
-        ];
-    };
+function TodoService($http, itemURL) {
+    this.query = function(callback) {
+        $http.get(itemURL).success(callback);
+    }
 };
