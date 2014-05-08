@@ -4,7 +4,10 @@ describe('TodoController', function() {
     beforeEach(inject(function($rootScope, $controller) {
         var configuration;
         $scope = $rootScope.$new();
-        configuration = { $scope: $scope };
+        configuration = { 
+            $scope: $scope,
+            TodoService: null
+        };
         $controller('TodoController', configuration);
         mockTodoItems();
     }));
@@ -25,6 +28,14 @@ describe('TodoController', function() {
         expect($scope.todos.length).toEqual(3);
     });
 
+    it('should be able to load items from the given JSON', function() {
+        var itemsInJson = [
+            { name: 'first item', done: false },
+            { name: 'second item', done: true }
+        ];
+        $scope.loadJson(itemsInJson);
+        expect($scope.todos.length).toEqual(2);
+    });
 
     describe('first item', function() {
         var firstItem;
