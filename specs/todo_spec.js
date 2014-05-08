@@ -29,12 +29,22 @@ describe('TodoController', function() {
     });
 
     it('should be able to load items from the given JSON', function() {
-        var itemsInJson = [
-            { name: 'first item', done: false },
-            { name: 'second item', done: true }
+        var itemsInJson, firstItem, secondItem;
+        itemsInJson = [
+            { title: 'first item', done: false },
+            { title: 'second item', done: true }
         ];
         $scope.loadJson(itemsInJson);
+
         expect($scope.todos.length).toEqual(2);
+
+        firstItem = $scope.todos[0];
+        expect(firstItem.name).toEqual('first item');
+        expect(firstItem.done).toEqual(false);
+
+        secondItem = $scope.todos[1];
+        expect(secondItem.name).toEqual('second item');
+        expect(secondItem.done).toEqual(true);
     });
 
     describe('first item', function() {

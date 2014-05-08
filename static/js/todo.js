@@ -17,9 +17,9 @@ function TodoController($scope, TodoService) {
 
     $scope.loadJson = function(itemsInJson) {
         $scope.todos = [];
-        itemsInJson.forEach(function(item) {
+        itemsInJson.forEach(function(itemInJson) {
             var item;
-            item = new TodoItem(item.name, item.done);
+            item = new TodoItem(itemInJson.title, itemInJson.done);
             $scope.todos.push(item);
         });
     };
@@ -47,9 +47,9 @@ function TodoItem(name, done) {
 function TodoService() {
     this.query = function() {
         return [
-            { name:'Learn Angular JS', done:true },
-            { name:'Write Angular JS application', done:true },
-            { name:'Write TODO application', done:false }
+            { title:'Learn Angular JS', done:true },
+            { title:'Write Angular JS application', done:true },
+            { title:'Write TODO application', done:false }
         ];
     };
 };
