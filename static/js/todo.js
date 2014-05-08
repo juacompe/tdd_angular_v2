@@ -1,8 +1,8 @@
 var todoApp, plugins, injections;
-plugins = [];
+plugins = ['ngResource'];
 todoApp = angular.module('TodoApp', plugins);
 todoApp.value('itemURL', 'https://juacompe-todo-app.firebaseio.com/todos.json');
-todoApp.service('TodoService', TodoService);
+todoApp.factory('TodoService', TodoService);
 injections = ['$scope', 'TodoService', TodoController];
 todoApp.controller('TodoController', injections);
 
@@ -43,8 +43,6 @@ function TodoItem(name, done) {
     };
 };
 
-function TodoService($http, itemURL) {
-    this.query = function(callback) {
-        $http.get(itemURL).success(callback);
-    }
+function TodoService($resource, itemURL) {
+    return $resource(itemURL);
 };
