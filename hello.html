@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+    <body ng-app>
+        <div ng-controller="HelloController">
+            <input type="text" ng-model="name" placeholder="enter a name here">
+            <h1>Hello {{ getName() }}!</h1>
+        </div>
+
+        <script type="text/javascript" src="static/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="static/js/hello.js"></script>
+    </body>
+</html>
