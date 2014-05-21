@@ -1,11 +1,23 @@
 var hello_world = function() {
-    var name = "roofimon";
+    var name;
+    name = "roofimon";
 
     var reverse_name = function() {
-        var e = name;
+        var e, name;
+        e = name;
         console.log("hello " + e + "!");
-        var name = "juacompe";
+        name = "juacompe";
     };
 
     reverse_name();
 };
+
+
+// Arrange
+// Act
+// Asset
+
+
+// Given
+// When
+// Then
