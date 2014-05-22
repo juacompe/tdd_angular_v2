@@ -39,7 +39,7 @@ describe('FizzBuzzController', function() {
 
     it('should be buffalo when has no input', function(){
         $scope.input = '';
-        expect("buffalo").toEqual($scope.getResult());
+        expect("fizzbuzz").toEqual($scope.getResult());
     });
 
     function createController($rootScope, $controller){

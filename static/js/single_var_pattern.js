@@ -1,8 +1,8 @@
 var hello_world = function() {
-    var name;
+    var name, reverse_name;
     name = "roofimon";
 
-    var reverse_name = function() {
+    reverse_name = function() {
         var e, name;
         e = name;
         console.log("hello " + e + "!");
