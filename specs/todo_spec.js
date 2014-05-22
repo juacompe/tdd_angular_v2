@@ -82,7 +82,7 @@ describe('TodoController', function() {
     }
 });
 
-describe('TodoController', function() {
+describe('Item', function() {
     it('should return CSS class as done if done', function() {
         var item = new Item('description', true);
         expect(item.css()).toEqual('done');
