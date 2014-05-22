@@ -4,8 +4,8 @@
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="static/css/todo.css">
     </head>
-    <body ng-app>
-        <form ng-controller="TodoController" ng-submit="formSubmitted()">
+    <body ng-app="todoApp">
+        <form ng-controller="TodoController" ng-submit="formSubmitted()" ng-init="init()">
             <input type="text" ng-model="newDescription" placeholder="type new item here">
             <ul>
                 <li ng-repeat="item in items" class="{{ item.css() }}">

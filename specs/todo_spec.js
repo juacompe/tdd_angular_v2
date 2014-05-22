@@ -2,13 +2,27 @@ describe('TodoController', function() {
     var $scope;
 
     beforeEach(inject(function($rootScope, $controller) {
+        createController($rootScope, $controller);
+        mockItems();
+    }));
+
+    function createController($rootScope, $controller) {
         var configuration;
         $scope = $rootScope.$new();
         configuration = {
             $scope: $scope,
+            TodoService: null,
         };
         $controller('TodoController', configuration);
-    }));
+    }
+
+    function mockItems() {
+        $scope.items = [
+            new Item('เรียน Angular', true),
+            new Item('เรียน TDD', true),
+            new Item('กลับบ้าน', false),
+        ];
+    };
 
     it('should starts with 3 items', function() {
         expect($scope.getItemLength()).toEqual(3);
@@ -64,6 +78,44 @@ describe('TodoController', function() {
         $scope.newDescription = 'อันใหม่';
         $scope.formSubmitted();
         expect($scope.newDescription).toEqual('');
+    });
+
+    it('should not allow empty todo to be added', function() {
+        $scope.newDescription = '';
+        $scope.formSubmitted();
+        expect($scope.getItemLength()).toEqual(3);
+    });
+
+    it('should be able to load items from given JSON (2 items)', function() {
+        var result = {
+            0: {
+                done: true,
+                title: "Learn Angular"
+            },
+            1: {
+                done: true,
+                title: "Try Angular"
+            }
+        };
+        $scope.jsonToItems(result);
+        expect($scope.getItemLength()).toEqual(2);
+        expectItemDescription(1, 'Learn Angular');
+        expectItemIsDone(1);
+        expectItemDescription(2, 'Try Angular');
+        expectItemIsDone(2);
+    });
+
+    it('should be able to load items from given JSON (1 item)', function() {
+        var result = {
+            0: {
+                done: false,
+                title: "ยะฮู้"
+            }
+        };
+        $scope.jsonToItems(result);
+        expect($scope.getItemLength()).toEqual(1);
+        expectItemDescription(1, 'ยะฮู้');
+        expectItemIsNotDone(1);
     });
 
     function expectItemDescription(order, expectedDescription) {
