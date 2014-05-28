@@ -1,3 +1,17 @@
+var fizzbuzzApp;
+fizzbuzzApp = angular.module('FizzBuzzApp', ['ngRoute']);
+fizzbuzzApp.config(function($routeProvider) {
+  $routeProvider
+    .when('/', {
+      controller:'FizzBuzzController',
+      templateUrl:'_fizzbuzz.html'
+    })
+    .otherwise({
+      redirectTo:'/'
+    });
+});
+
+
 function FizzBuzzController($scope) {
 
     $scope.getResult = function() {
