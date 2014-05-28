@@ -11,17 +11,13 @@ function TodoController($scope, TodoService) {
     $scope.items = [];
 
     $scope.init = function() {
-        TodoService.get($scope.jsonToItems);
+        TodoService.get($scope.setItems);
     };
 
-    $scope.jsonToItems = function(result) {
-        var key, json;
-        $scope.items = [];
-        for(key in result) {
-            json = result[key];
-            $scope.items.push(new Item(json.title, json.done));
-        }
-    }
+    $scope.setItems = function(items) {
+        
+        $scope.items = items;
+    };
 
     $scope.getItemLength = function() {
         return $scope.items.length;
@@ -46,8 +42,22 @@ function TodoController($scope, TodoService) {
 };
 
 function TodoService($http) {
-    this.get = function(callback) {
-        $http.get('https://juacompe-todo-app.firebaseio.com/todos.json').success(callback);
+    this.get = function(setItems) {
+        service = this;
+        $http.get('https://juacompe-todo-app.firebaseio.com/todos.json').success(function(result) {
+            var items = service.jsonToItems(result);
+            setItems(items);
+        });
+    };
+
+    this.jsonToItems = function(result) {
+        var key, json, items;
+        items = [];
+        for(key in result) {
+            json = result[key];
+            items.push(new Item(json.title, json.done));
+        };
+        return items;
     };
 };
 

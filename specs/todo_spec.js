@@ -86,38 +86,6 @@ describe('TodoController', function() {
         expect($scope.getItemLength()).toEqual(3);
     });
 
-    it('should be able to load items from given JSON (2 items)', function() {
-        var result = {
-            0: {
-                done: true,
-                title: "Learn Angular"
-            },
-            1: {
-                done: true,
-                title: "Try Angular"
-            }
-        };
-        $scope.jsonToItems(result);
-        expect($scope.getItemLength()).toEqual(2);
-        expectItemDescription(1, 'Learn Angular');
-        expectItemIsDone(1);
-        expectItemDescription(2, 'Try Angular');
-        expectItemIsDone(2);
-    });
-
-    it('should be able to load items from given JSON (1 item)', function() {
-        var result = {
-            0: {
-                done: false,
-                title: "ยะฮู้"
-            }
-        };
-        $scope.jsonToItems(result);
-        expect($scope.getItemLength()).toEqual(1);
-        expectItemDescription(1, 'ยะฮู้');
-        expectItemIsNotDone(1);
-    });
-
     function expectItemDescription(order, expectedDescription) {
         var item = $scope.getItem(order);
         expect(item.description).toEqual(expectedDescription);
@@ -144,4 +112,63 @@ describe('Item', function() {
         var item = new Item('description', false);
         expect(item.css()).toEqual('');
     });
+});
+
+describe('TodoService', function() {
+    var service;
+
+    beforeEach(function() {
+        module('todoApp');
+        inject(function(TodoService) {
+            service = TodoService;
+        });
+    });
+
+    it('should be able to load items from given JSON (1 item)', function() {
+        var result = {
+            0: {
+                done: false,
+                title: "ยะฮู้"
+            }
+        };
+        items = service.jsonToItems(result);
+        expect(items.length).toEqual(1);
+        expectItemDescription(items, 1, 'ยะฮู้');
+        expectItemIsNotDone(items, 1);
+    });
+
+    it('should be able to load items from given JSON (2 items)', function() {
+        var result, items;
+        result = {
+            0: {
+                done: true,
+                title: "Learn Angular"
+            },
+            1: {
+                done: true,
+                title: "Try Angular"
+            }
+        };
+        items = service.jsonToItems(result);
+        expect(items.length).toEqual(2);
+        expectItemDescription(items, 1, 'Learn Angular');
+        expectItemIsDone(items, 1);
+        expectItemDescription(items, 2, 'Try Angular');
+        expectItemIsDone(items, 2);
+    });
+
+    function expectItemDescription(items, order, expectedDescription) {
+        var item = items[order-1];
+        expect(item.description).toEqual(expectedDescription);
+    };
+
+    function expectItemIsDone(items, order) {
+        var item = items[order-1];
+        expect(item.done).toEqual(true);
+    };
+
+    function expectItemIsNotDone(items, order) {
+        var item = items[order-1];
+        expect(item.done).toEqual(false);
+    };
 });
