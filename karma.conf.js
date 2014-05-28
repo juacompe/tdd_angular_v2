@@ -19,6 +19,7 @@ module.exports = function(karma) {
     'static/js/lib/*.js',
 
     // our app
+    'static/js/todo.js',
     'static/js/*.js',
 
     // tests
