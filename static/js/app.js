@@ -1,7 +1,6 @@
 var allApp;
 allApp = angular.module('AllApp', ['ngRoute']);
-allApp.service('TodoService', TodoService);
-allApp.controller('TodoController', ['$scope', 'TodoService', TodoController]);
+wireTodoApplication(allApp);
 allApp.config(function($routeProvider) {
   var home, fizzbuzz, redirectToHome, greeting;
   home = {

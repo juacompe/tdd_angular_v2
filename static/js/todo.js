@@ -1,7 +1,11 @@
 var todoApp;
 todoApp = angular.module('todoApp', []);
-todoApp.service('TodoService', TodoService);
-todoApp.controller('TodoController', ['$scope', 'TodoService', TodoController]);
+wireTodoApplication(todoApp);
+
+function wireTodoApplication(app) {
+    app.service('TodoService', TodoService);
+    app.controller('TodoController', ['$scope', 'TodoService', TodoController]);
+}
 
 function TodoController($scope, TodoService) {
     $scope.items = [];
