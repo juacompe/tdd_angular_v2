@@ -1,2 +1,5 @@
 # Vim
 *.swp
+
+# External javasciprt libraries
+node_modules
