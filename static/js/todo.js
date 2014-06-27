@@ -11,11 +11,10 @@ function TodoController($scope, TodoService) {
     $scope.items = [];
 
     $scope.init = function() {
-        TodoService.get($scope.setItems);
+        TodoService.get().then($scope.setItems);
     };
 
     $scope.setItems = function(items) {
-        
         $scope.items = items;
     };
 
@@ -41,17 +40,15 @@ function TodoController($scope, TodoService) {
     }
 };
 
-function TodoService($http) {
+function TodoService($http, $q) {
     this.get = function(setItems) {
-        service = this;
-        $http.get('https://juacompe-todo-app.firebaseio.com/todos.json').success(function(result) {
-            var items = service.jsonToItems(result);
-            setItems(items);
-        });
+        return $http.get('https://juacompe-todo-app.firebaseio.com/todos.json')
+                    .then(this.jsonToItems)
     };
 
     this.jsonToItems = function(result) {
-        var key, json, items;
+        var key, json, items, deferred;
+        result = result.data;
         items = [];
         for(key in result) {
             json = result[key];

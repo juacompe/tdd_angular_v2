@@ -125,7 +125,8 @@ describe('TodoService', function() {
     });
 
     it('should be able to load items from given JSON (1 item)', function() {
-        var result = {
+        var result = {};
+        result.data = {
             0: {
                 done: false,
                 title: "ยะฮู้"
@@ -139,7 +140,8 @@ describe('TodoService', function() {
 
     it('should be able to load items from given JSON (2 items)', function() {
         var result, items;
-        result = {
+        result = {};
+        result.data = {
             0: {
                 done: true,
                 title: "Learn Angular"
